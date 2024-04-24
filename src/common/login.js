@@ -38,7 +38,7 @@ const Login = () => {
   };
 
   return (
-    <section className="login d-flex align-items-centerjustify-content-center">
+    <section className="d-flex align-items-centerjustify-content-center">
       <div className="container">
         <div className="row my-5">
           <div className="col-xl-5 col-lg-6 col-md-8 col-sm-12 mx-auto">
@@ -86,12 +86,11 @@ const Login = () => {
                     Log in
                   </button>
                 </div>
-                <div className="mt-">
-                  <span className="text-muted"> Don't have an account? </span>
-                    <Link className="" to="/register">
-                      New User?
-                    </Link>
-                 
+                <div className="mt-3 text-center ">
+                  <span className="me-4" style={{color:'#b5b1b1'}}> Don't have an account? </span>
+                    <Link className="link-underline link-underline-opacity-0 link-primary"  to="/register">
+                     sign up
+                    </Link>  
                 </div>
               </form>
             </div>

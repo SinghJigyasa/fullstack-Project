@@ -1,72 +1,119 @@
+import axios from "axios";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-import axios from "axios"
-import { useState } from "react"
-import { Link } from "react-router-dom"
+const RegisterUser = () => {
+  const [fieldData, setFieldData] = useState({});
 
+  const handleChange = (e) => {
+    setFieldData((pre) => ({ ...pre, [e.target.name]: e.target.value }));
+  };
+  const handleClick = () => {
+    console.log(fieldData);
+    axios.post("http://localhost:8080/register", fieldData).then((res) => {
+      console.log(res.data);
+    });
+  };
+  return (
+    <section className="d-flex justify-content-center align-items-center ">
+      <div className="container">
+        <div className="row my-5">
+          <div className="col-xl-5 col-lg-6 col-md-8 col-sm-12 mx-auto">
+            <div className="card shadow rounded-4 border-1 p-lg-5">
+              <h1 className="fw-bold items-center py-3 justify-center">
+                Register your account
+              </h1>
+              <form className="text-secondary">
+                <div className="row my-3">
+                  <div class="col">
+                    <label className="form-label" htmlFor="firstName">
+                      First Name
+                    </label>
+                    <input
+                      className="form-control"
+                      name="firstName"
+                      type="text"
+                      placeholder="First Name"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="col">
+                    <label className="form-label" htmlFor="lastName">
+                      Last Name
+                    </label>
+                    <input
+                      className="form-control"
+                      name="lastName"
+                      type="text"
+                      placeholder="Last Name"
+                      onChange={handleChange}
+                    />
+                  </div>
+                </div>
+                <div class="mb-3 my-3">
+                  <label htmlFor="email" class="form-label">
+                    Email Address
+                  </label>
+                  <input
+                    type="text"
+                    name="email"
+                    class="form-control"
+                    placeholder="you@example.com"
+                    onChange={handleChange}
+                  />
+                </div>
 
-const RegisterUser=()=>{
-    const [fieldData,setFieldData]= useState({})
-    
-    const handleChange=(e)=>{
-        setFieldData(pre=>({...pre, [e.target.name]:e.target.value})) 
-    }
-    const handleClick=()=>{       
-        console.log(fieldData);
-        axios.post("http://localhost:8080/register",fieldData)
-        .then(res=>{
-            console.log(res.data);
-        })
-    }
-    return(
-      <div className="flex justify-center items-center h-screen bg-gray-100 ">
-        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-         <h1 className="font-bold items-center py-3 px-2 justify-center flex text-lg mb-4">Register your account</h1>
-         <div className="flex flex-wrap mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="firstName">
-              First Name
-            </label>
-            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="firstName" type="text" placeholder="First Name" onChange={handleChange}/>
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="lastName">
-              Last Name
-            </label>
-            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="lastName" type="text" placeholder="Last Name" onChange={handleChange}/>
-          </div>
-        </div>
-       
-        <div className="flex flex-wrap mx-6 mb-6">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="email">
-              Email Address
-            </label>
-            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="email" type="text" placeholder="you@example.com" onChange={handleChange}/>
-        </div>
-        
-        <div className="flex flex-wrap mx-3 mb-6">
-          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="password">
-              Password
-            </label>
-            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" name="pass" type="password" placeholder="Password" onChange={handleChange}/>
-          </div>
-          <div className="w-full md:w-1/2 px-3">
-            <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="confirm-password">
-              Confirm Password
-            </label>
-            <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name="confirm-password" type="password" placeholder="Confirm Password"/>
+                <div className="row my-3">
+                  <div class="col">
+                    <label className="form-label" htmlFor="password">
+                      Password
+                    </label>
+                    <input
+                      className="form-control"
+                      name="pass"
+                      type="password"
+                      placeholder="******"
+                      onChange={handleChange}
+                    />
+                  </div>
+                  <div class="col">
+                    <label className="form-label" htmlFor="confirm-password">
+                      Confirm Password
+                    </label>
+                    <input
+                      className="form-control"
+                      name="confirm-password"
+                      type="password"
+                      placeholder="*******"
+                    />
+                  </div>
+                </div>
+                <div className="d-block border-bottom ">
+                  <button
+                    className="btn btn-warning w-100 my-2 mb-4 fw-medium"
+                    type="button"
+                    onClick={handleClick}
+                  >
+                    sign Up
+                  </button>
+                </div>
+                <div className="mt-3 text-center ">
+                  <span className="me-4" style={{ color: "#b5b1b1" }}>
+                    Already have an account?
+                  </span>
+                  <Link
+                    className="link-underline link-underline-opacity-0 link-primary"
+                    to="/"
+                  >
+                    sign in
+                  </Link>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
-        <div className="flex items-center justify-between">
-        <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-6 rounded-full focus:outline-none focus:shadow-outline" type="button" onClick={handleClick}>
-          sign Up
-        </button>
-        <Link className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800 me-6" to='/'>
-          Existing User?
-        </Link>
-        </div>
-      </form>
       </div>
-    )
-}
+    </section>
+  );
+};
 export default RegisterUser;
